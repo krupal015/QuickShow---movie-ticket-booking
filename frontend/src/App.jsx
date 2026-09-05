@@ -9,17 +9,21 @@ import MyBookings from './pages/MyBookings'
 import Favorite from './pages/Favorite'
 import Footer from './components/Footer'
 import { Toaster } from 'react-hot-toast'
-import { AuthenticateWithRedirectCallback } from "@clerk/clerk-react";
+import { AuthenticateWithRedirectCallback, SignIn } from "@clerk/clerk-react";
 import Layout from './pages/Admin/Layout'
 import DashBoard from './pages/Admin/DashBoard'
 import AddShows from './pages/Admin/AddShows'
 import ListShows from './pages/Admin/ListShows'
 import ListBookings from './pages/Admin/ListBookings'
+import { useAppContext } from './context/AppContext'
+import Loading from './components/Loading'
 const App = () => {
 
   const location = useLocation()
 
   const isAdmin = location.pathname.startsWith('/admin')
+
+  const {user} = useAppContext()
 
   return (
     <>
@@ -32,8 +36,13 @@ const App = () => {
         <Route path='/movies/:id/:date' element={<SeatLayout />} />
         <Route path='/my-bookings' element={<MyBookings />} />
         <Route path='/favorite' element={<Favorite />} />
+        <Route path='/loading/:nexturl' element={<Loading />} />
 
-        <Route path='/admin/*' element={<Layout />}>
+        <Route path='/admin/*' element={user ? <Layout /> : (
+          <div className='min-h-screen flex justify-center items-center'>
+            <SignIn fallbackRedirectUrl={'/admin'} />
+          </div>
+        )}>
           <Route index element={<DashBoard />} />
           <Route path='add-shows' element={<AddShows />} />
           <Route path='list-shows' element={<ListShows />} />
