@@ -48,6 +48,10 @@ app.use('/api/admin', adminRouter)
 app.use('/api/user', userRouter)
 app.use('/api/payment', paymentRouter)
 
-app.listen(port, () => console.log(`server is running on http://localhost:${port}`))
+// app.listen(port, () => console.log(`server is running on http://localhost:${port}`))
+
+if (process.env.NODE_ENV !== "production") {
+    app.listen(port, () => console.log(`server is running on http://localhost:${port}`));
+}
 
 export default app
