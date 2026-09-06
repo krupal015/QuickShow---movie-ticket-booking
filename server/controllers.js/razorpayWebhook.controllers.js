@@ -1,5 +1,8 @@
 import crypto from "crypto";
 import Booking from "../models/booking.models.js";
+import { inngest } from "../inngest/index.js";
+
+console.log("INNGEST IMPORT:", inngest);
 
 export const razorpayWebhooks = async (req, res) => {
     try {
@@ -49,6 +52,15 @@ export const razorpayWebhooks = async (req, res) => {
                     isPaid: true,
                     paymentLink: ""
                 });
+
+                // send confirmation email
+
+                await inngest.send({
+                    name: "app/show.booked",
+                    data: {
+                        bookingId: booking._id.toString()
+                    }
+                })
 
                 console.log("Booking marked as paid:", booking._id);
 

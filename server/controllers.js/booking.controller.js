@@ -131,6 +131,14 @@ export const createBooking = async (req, res) => {
         booking.razorpayOrderId = order.id
         await booking.save()
 
+        // Run Inngest Scheduler Function to check payment status after 10 minutes
+        await inngest.send({
+            name: "app/checkpayment",
+            data: {
+                bookingId: booking._id.toString()
+            }
+        })
+
         res.json({
             success: true,
             order,
