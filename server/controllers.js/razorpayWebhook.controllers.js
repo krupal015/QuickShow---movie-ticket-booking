@@ -2,7 +2,6 @@ import crypto from "crypto";
 import Booking from "../models/booking.models.js";
 import { inngest } from "../inngest/index.js";
 
-console.log("INNGEST IMPORT:", inngest);
 
 export const razorpayWebhooks = async (req, res) => {
     try {
