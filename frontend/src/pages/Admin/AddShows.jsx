@@ -1,13 +1,12 @@
 import { useAuth } from '@clerk/clerk-react'
 import React, { useEffect, useState } from 'react'
-import { dummyShowsData } from '../../assets/assets'
 import Loading from '../../components/Loading'
 import Title from '../../components/admin/Title'
 import { CheckIcon, DeleteIcon, StarIcon } from 'lucide-react'
-import { kConverter } from '../../lib/Kconverter'
+import { kConverter } from '../../lib/Kconverter.js'
 import { useAppContext } from '../../context/AppContext'
 import toast from 'react-hot-toast'
-// import Movie from '../../../../server/models/movies.models.js'
+
 
 const AddShows = () => {
 

@@ -1,6 +1,7 @@
 import Booking from "../models/booking.models.js";
 import Show from "../models/show.models.js"
 import razorpayInstance from '../config/razorpay.js'
+import { inngest } from "../inngest/index.js";
 
 // function to check availability os selected seats for the movie
 export const checkSeatAvailability = async (showId, selectedSeats) => {

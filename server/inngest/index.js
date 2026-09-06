@@ -3,6 +3,7 @@ import User from '../models/user.models.js'
 import Booking from "../models/booking.models.js";
 import Show from "../models/show.models.js";
 
+
 // Create a client to send and receive events
 export const inngest = new Inngest({ id: "movie-ticket-booking" });
 
